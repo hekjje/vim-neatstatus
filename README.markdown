@@ -1,26 +1,7 @@
 Neat Status Line
 ===
 
-[![endorse](https://api.coderwall.com/luke/endorsecount.png)](https://coderwall.com/luke)
-
-Yet another status line plugin. The aim of Neat Status is to provide neat, and 
-simple UI with just basic information and no bells and whistles for those users
-who consider things like Powerline to be overkill.
-
-Neat Status is loosely based on the status line script created by Tomas Restrepo.
-The original can be seen here:
-
-  * http://winterdom.com/2007/06/vimstatusline
-
-The basic idea is roughly the same, but the script was heavily modified and made
-more customizable and modular to work better as a plugin rather than just a
-`.vimrc` snippet.
-
-**Note:** this is not a drop-in replacement for Powerline but rather a much
-simpler and streamlined plugin. The aim of the project is not to achieve one
-to one feature compatibility but merely to implement a narrow subset of said
-features for users who want something simple and easy. If you would like a
-robust, feature-full Powerline replacement you should check out [Vim-Airline][va].
+Fork of https://github.com/maciakl/vim-neatstatus
 
 Screenshots
 -----------
