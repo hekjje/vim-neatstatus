@@ -31,12 +31,12 @@ Installation
 To install with Pathogen:
 
     cd ~/.vim/bundle
-    git clone git://github.com:hekjje/vim-neatstatus.git
+    git clone git://github.com/hekjje/vim-neatstatus.git
 
 If your .vim is under source control with Git do this instead:
 
     cd ~/.vim
-    git submodule add git://github.com:hekjje/vim-neatstatus.git bundle/vim-neatstatus
+    git submodule add git://github.com/hekjje/vim-neatstatus.git bundle/vim-neatstatus
     git submodule init
     git submodule update
 
