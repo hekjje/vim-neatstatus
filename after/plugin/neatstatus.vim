@@ -72,6 +72,50 @@ endfunc
 "==============================================================================
 "==============================================================================
 
+if !exists('g:git_bin')
+    let g:git_bin = 'git'
+endif
+
+function! s:SystemGit(args)
+    " workardound for MacVim, on which shell does not inherit environment
+    " variables
+    if has('mac') && &shell =~ 'sh$'
+        return system('EDITOR="" '. g:git_bin . ' ' . a:args)
+    else
+        return system(g:git_bin . ' ' . a:args)
+    endif
+endfunction
+
+function! s:GetGitDir()
+    if !exists('b:git_dir')
+        let b:git_dir = s:SystemGit('rev-parse --git-dir')
+        if !v:shell_error
+            let b:git_dir = fnamemodify(split(b:git_dir, "\n")[0], ':p') . '/'
+        endif
+    endif
+    return b:git_dir
+endfunction
+
+" Returns current git branch.
+" Call inside 'statusline' or 'titlestring'.
+function! GitBranch()
+    let git_dir = <SID>GetGitDir()
+
+    if strlen(git_dir) && filereadable(git_dir . '/HEAD')
+        let lines = readfile(git_dir . '/HEAD')
+        if !len(lines)
+            return ''
+        else
+            return '['.matchstr(lines[0], 'refs/heads/\zs.\+$').']'
+        endif
+    else
+        return ''
+    endif
+endfunction
+
+"==============================================================================
+"==============================================================================
+
 if has('statusline')
 
     " set up color scheme now
@@ -146,6 +190,8 @@ if has('statusline')
         let &stl.="%5* %{g:neatstatus_session} %0*"
         " file path
         let &stl.=" %<%F "
+				" show git branch
+        let &stl.=" %{GitBranch()} "
         " read only, modified, modifiable flags in brackets
         let &stl.="%([%R%M]%) "
 
